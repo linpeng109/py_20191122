@@ -1,14 +1,14 @@
 import datetime
-import logging
+import mylogging
 
 import psutil
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 
-logging.basicConfig(filename='app.log', level=logging.DEBUG)
+mylogging.basicConfig(filename='app.log', level=mylogging.DEBUG)
 
 
-def MonitorSystem(logging=logging):
+def MonitorSystem(logging=mylogging):
     cpuinfo = psutil.cpu_percent()
     meminfo = psutil.virtual_memory()
     now = datetime.datetime.now()
@@ -20,7 +20,7 @@ def MonitorSystem(logging=logging):
         print(line)
 
 
-def MonitorNetWork(logging=logging):
+def MonitorNetWork(logging=mylogging):
     netinfo = psutil.net_io_counters()
     line = f'bytessent:{netinfo.bytes_sent} bytesrecv:{netinfo.bytes_recv}'
     if (logging):

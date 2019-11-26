@@ -1,6 +1,5 @@
 # 在RaspberryPI上实现网页数据抓取
 # -*- coding: utf-8 -*-
-import json
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -24,6 +23,6 @@ xpath = '//div[contains(@class,"c-container")]'
 # xpath = '//div[@id="wrapper"]/div[@id="wrapper_wrapper"]/div[@id="container"]/div[@id="content_left]/div[contains(@class,"c-container")]'
 result = browser.find_elements_by_xpath(xpath=xpath)
 for item in result:
-    print(json.dumps(item))
+    print(item.text)
 
 browser.quit()
