@@ -6,11 +6,11 @@ def get_mac_address(h=None):
     print(uuid_int)
     mac = uuid.UUID(int=uuid_int)
     # .hex[-12:]
-    print(mac)
-    print(mac.hex[-8:])
+    # print(mac)
+    print(mac.hex[-12:])
     return mac.hex[-12:]
 
 
-if __name__ == '__main__':
-    result = get_mac_address()
-    print(result)
+# if __name__ == '__main__':
+#     result = get_mac_address()
+#     print(result)
