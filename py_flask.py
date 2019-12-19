@@ -33,5 +33,16 @@ def uipathcommand():
     return result
 
 
+@app.route('/uipath/lims')
+def limscommand():
+    _lines = uipath.commander(cmd=uipath.lims)
+    result = ''
+    for line in _lines:
+        result = result + str(line)
+    # print(result)
+    producer.send(result, callback)
+    return result
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
