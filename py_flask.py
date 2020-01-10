@@ -4,6 +4,7 @@ import py_kafka_producer as producer
 import py_uipath as uipath
 
 app = Flask(__name__)
+app.permanent_session_lifetime = 2000
 
 
 @app.route('/')
@@ -29,7 +30,7 @@ def uipathcommand():
     for line in _lines:
         result = result + str(line)
     # print(result)
-    producer.send(result, callback)
+    # producer.send(result, callback)
     return result
 
 
