@@ -15,7 +15,7 @@ class MyHandler(FTPHandler):
         print("%s:%s connected" % (self.remote_ip, self.remote_port))
         # winsound.Beep(600, 1000)
         pass
-
+    # 当文件上传完毕时触发
     def on_file_received(self, file):
         self.c
         py_excel.main(file)
@@ -40,6 +40,6 @@ def main():
     server.max_cons_per_ip = 5
     server.serve_forever()
 
-
+# 运行函数
 if __name__ == '__main__':
     main()
