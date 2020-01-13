@@ -1,9 +1,9 @@
 import datetime
-import py_logging
 
 import psutil
 from apscheduler.schedulers.blocking import BlockingScheduler
 
+import py_logging
 
 py_logging.basicConfig(filename='app.log', level=py_logging.DEBUG)
 

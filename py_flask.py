@@ -6,7 +6,6 @@ import py_uipath as uipath
 app = Flask(__name__)
 app.permanent_session_lifetime = 2000
 
-
 @app.route('/')
 def helloWorld():
     return 'Hello World'

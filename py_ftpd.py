@@ -6,6 +6,9 @@ import py_excel
 
 
 class MyHandler(FTPHandler):
+    def __init__(self):
+        return "null"
+
     def on_login(self, username):
         print("username:%s" % username)
         # winsound.Beep(600, 500)
@@ -39,6 +42,7 @@ def main():
     server.max_cons = 256
     server.max_cons_per_ip = 5
     server.serve_forever()
+
 
 # 运行函数
 if __name__ == '__main__':

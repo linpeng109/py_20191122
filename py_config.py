@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 
 cfg = ConfigParser()
+
 cfg.read(filenames='config.ini', encoding='utf8')
 
 if __name__ == '__main__':

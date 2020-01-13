@@ -2,18 +2,18 @@ import sys
 import time
 
 import servicemanager
-import win32event
-import win32service
+import win32.win32event as win32event
+import win32.win32service as win32service
 import win32serviceutil
 
 
 class PythonService(win32serviceutil.ServiceFramework):
     # 服务名
-    _svc_name_ = "ALicense"
+    _svc_name_ = "PythonService"
     # 服务显示名称
-    _svc_display_name_ = "ALicense Is Exist "
+    _svc_display_name_ = "PythonServiceTest"
     # 服务描述
-    _svc_description_ = "ALicense  Is Exist License windows"
+    _svc_description_ = "Python Service Test"
 
     def __init__(self, args):
         win32serviceutil.ServiceFramework.__init__(self, args)
@@ -21,20 +21,20 @@ class PythonService(win32serviceutil.ServiceFramework):
         self.run = True
 
     def SvcDoRun(self):
-        '''服务启动后执行'''
+        # print("服务启动......")
         while self.run:
             self._Log('start')
             time.sleep(7)
 
     def SvcStop(self):
-        '''服务停止时执行'''
+        # print("服务停止......")
         self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
         win32event.SetEvent(self.hWaitStop)
         self.run = False
         self._Log('stop')
 
     def _Log(self, str):
-        with open('F:/helloServices.txt', 'a') as f:
+        with open('D:/helloServices.txt', 'a') as f:
             f.writelines('hello world' + str + '\n')
 
 
