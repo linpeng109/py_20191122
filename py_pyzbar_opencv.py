@@ -21,7 +21,7 @@ def decodeDisplay(image):
                     .5, (0, 0, 125), 2)
 
         # 向终端打印条形码数据和条形码类型
-        print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
+        print("[中矿智信] Found {} barcode: {}".format(barcodeType, barcodeData))
     return image
 
 
