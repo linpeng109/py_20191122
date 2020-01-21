@@ -4,6 +4,8 @@ import numpy as np
 def readText(textFileName):
     textFile = open(textFileName, 'r', encoding='utf-16', errors='ignore')
     lines = textFile.readlines()
+    # lines=np.loadtxt(textFileName)
+    # print(lines)
     dataArray = []
     for line in lines:
         num = list(map(str, line.strip('\n').split('\t')))
