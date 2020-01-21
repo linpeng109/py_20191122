@@ -20,7 +20,7 @@ class MyHandler(FTPHandler):
         pass
     # 当文件上传完毕时触发
     def on_file_received(self, file):
-        self.c
+
         py_excel.main(file)
         winsound.Beep(600, 1000)
         pass

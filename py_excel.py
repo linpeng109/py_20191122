@@ -11,4 +11,4 @@ def parser(filename, sheetname):
 
 
 if __name__ == '__main__':
-    parser('AFS-8510.xlsx', '断续流动程序')
+    parser('AFS-8510.xlsx', '样品测量数据')
