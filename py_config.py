@@ -1,10 +1,15 @@
 from configparser import ConfigParser
 
-cfg = ConfigParser()
 
-cfg.read(filenames='config.ini', encoding='utf8')
+def getCfg():
+    cfg = ConfigParser()
+    cfg.read(filenames='config.ini', encoding='utf8')
+    return cfg
+
 
 if __name__ == '__main__':
-    print(cfg.sections())
-    print(cfg.getint('default', 'port').__class__)
+    cfg = getCfg()
+    # print(cfg.sections())
     print(cfg.get('default', 'port'))
+    print(cfg.get('logging', 'filename'))
+    print(cfg.get('ftpd', 'username'))

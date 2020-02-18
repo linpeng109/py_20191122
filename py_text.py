@@ -8,17 +8,15 @@ def readText(textFileName):
     # print(lines)
     dataArray = []
     for line in lines:
-        num = list(map(str, line.strip('\n').split('\t')))
-        # num = line \
-        #     .strip('\n') \
-        #     .split('\t')
-        dataArray.append(num)
+        items=line.strip('\n').split('  ')
+        # print(items)
+        dataArray.append(items)
 
     dataArray = np.delete(dataArray, [0, 1], axis=0)
     # dataArray = np.delete(dataArray, 1, 1)
     dataArray = np.sort(dataArray, axis=0)
     print(dataArray)
-    np.savetxt("a.csv", dataArray, encoding='utf-16', delimiter=",", fmt='%s')
+    np.savetxt("a.csv", dataArray, encoding='utf-16', delimiter="  ", fmt='%s')
     textFile.close()
 
 
