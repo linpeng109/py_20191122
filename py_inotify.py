@@ -3,7 +3,6 @@ import pyinotify
 import py_config
 import py_logging
 import py_pandas as conv
-import py_path as path
 
 
 class EventHandler(pyinotify.ProcessEvent):

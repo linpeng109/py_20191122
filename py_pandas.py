@@ -8,21 +8,23 @@ import py_path as path
 def convertHCSTxt(hcsTextFileName):
     # 读取
     # dict = {'sep': ' ', 'encoding': 'UTF-16', 'dtype': 'str', 'header': None, 'engine': 'python'}
-    dict = {'sep': ' ', 'encoding': 'UTF-16', 'dtype': 'str', 'header': None, 'engine': 'python', 'na_filter': True}
+    dict = {'sep': ' ', 'encoding': 'UTF-16', 'dtype': 'str', 'header': None, 'engine': 'python', 'na_filter': False}
     hcsDf = pd.read_csv(filepath_or_buffer=hcsTextFileName, **dict)
     print(hcsDf)
     # 处理清洗
     print('=========== dropna ==============')
-    hcsDf.dropna(axis=1, how='all', inplace=False)
-    # hcsDf = hcsDf.drop(index=[0, 1])  # 删除表头标题
+    # hcsDf.dropna(axis=1, how='all', inplace=False)
+    hcsDf = hcsDf.drop(index=[0, 1])  # 删除表头标题
     # print(hcsDf)
     print(hcsDf)
-    # hcsDf = hcsDf.sort_index(0, ascending=False)
+    # 排序
+    hcsDf = hcsDf.sort_index(0, ascending=False)
     # print(hcsDf)
     # 写入文本
-    # newfilename = convertFilename(hcsTextFileName)
+    newfilename = convertFilename(hcsTextFileName)
     # hcsDf.to_csv(newfilename, index=None, header=None)
-    # hcsDf.to_csv(newfilename, index=None, header=None, encoding='gbk', line_terminator='\r\n')
+    print(newfilename)
+    hcsDf.to_csv(newfilename, index=None, header=None, encoding='gbk', line_terminator='\r\n')
     return hcsDf
 
 
@@ -43,7 +45,7 @@ def convertAASTxt(aasTextFilename):
     # 读取
     dict = {'dtype': 'str',
             'header': None, 'engine': 'python'}
-    aasDf = pd.read_csv(filepath_or_buffer=aasTextFilename, encoding='GB2312', **dict)
+    aasDf = pd.read_csv(filepath_or_buffer=aasTextFilename, encoding='gbk', **dict)
     # 写入文本
     newfilename = convertFilename(aasTextFilename)
     aasDf.to_csv(newfilename, index=None, header=None, encoding='gbk', line_terminator='\r\n')
@@ -60,12 +62,15 @@ def startProcess(file):
     if (path.filenameIsContains(file, ['AAS.txt'])):
         process = Process(target=convertAASTxt, args=(file,))
         process.start()
+        # process.join()
     if (path.filenameIsContains(file, ['HCS.txt'])):
         process = Process(target=convertHCSTxt, args=(file,))
         process.start()
+        # process.join()
     if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
         process = Process(target=convertAFSExcel, args=(file,))
         process.start()
+        # process.join()
 
 
 if __name__ == '__main__':

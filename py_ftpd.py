@@ -13,7 +13,7 @@ import py_path as path
 class MyHandler(FTPHandler):
     def on_login(self, username):
         # print("username:%s" % username)
-        winsound.Beep(600, 500)
+        # winsound.Beep(600, 500)
         pass
 
     def on_connect(self):
@@ -24,14 +24,14 @@ class MyHandler(FTPHandler):
     def on_file_received(self, file):
         logger = log.getLogger()
         logger.debug(file)
-
-        if (path.filenameIsContains(file, 'AAS')):
+        # conv.startProcess(file)
+        if (path.filenameIsContains(file, ['AAS.txt'])):
             conv.convertAASTxt(file)
-        if (path.filenameIsContains(file, 'HCS')):
+        if (path.filenameIsContains(file, ['HCS.txt'])):
             conv.convertHCSTxt(file)
-        if (path.filenameIsContains(file, 'AFS')):
+        if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
             conv.convertAFSExcel(file)
-        winsound.Beep(600, 500)
+        # winsound.Beep(600, 500)
         pass
 
 
@@ -55,11 +55,15 @@ def main():
     handler = MyHandler
     handler.authorizer = authorizer
     handler.banner = "pyftpdlib based ftpd ready."
+    handler.use_sendfile = False
     address = (cfg.get('ftpd', 'host'), cfg.get('ftpd', 'port'))
     server = FTPServer(address, handler)
     server.max_cons = 256
-    server.max_cons_per_ip = 5
-    server.serve_forever()
+    server.max_cons_per_ip = 25
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        server.close_all()
 
 
 # 运行函数
