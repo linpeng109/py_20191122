@@ -9,7 +9,8 @@ def getCfg():
 
 if __name__ == '__main__':
     cfg = getCfg()
+
     # print(cfg.sections())
-    print(cfg.get('default', 'port'))
+    print(cfg.get('ftpd', 'port'))
     print(cfg.get('logging', 'filename'))
     print(cfg.get('ftpd', 'username'))

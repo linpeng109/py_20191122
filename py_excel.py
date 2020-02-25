@@ -5,6 +5,7 @@ def parser(filename, sheetname):
     workbook = openpyxl.load_workbook(filename=filename)
 
     worksheet = workbook[sheetname]
+
     for row in worksheet.rows:
         for cell in row:
             print(cell.value, "\t", end="")
