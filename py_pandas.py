@@ -12,14 +12,14 @@ def convertHCSTxt(hcsTextFileName):
     hcsDf = pd.read_csv(filepath_or_buffer=hcsTextFileName, **dict)
     print(hcsDf)
     # 处理清洗
-    print('=========== dropna ==============')
-    # hcsDf.dropna(axis=1, how='all', inplace=False)
     hcsDf = hcsDf.drop(index=[0, 1])  # 删除表头标题
     # print(hcsDf)
     print(hcsDf)
     # 排序
     hcsDf = hcsDf.sort_index(0, ascending=False)
-    # print(hcsDf)
+    print('=========== dropna ==============')
+    hcsDf = hcsDf.dropna()
+    print(hcsDf)
     # 写入文本
     newfilename = convertFilename(hcsTextFileName)
     # hcsDf.to_csv(newfilename, index=None, header=None)
