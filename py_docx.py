@@ -7,9 +7,6 @@ import win32print
 from docx import Document
 from docx.shared import Inches
 
-def createDATA():
-    
-
 
 def createDOCX(filename, rows, cols):
     document = Document()
@@ -22,8 +19,8 @@ def createDOCX(filename, rows, cols):
             randomStr = ''.join(str(uuid.uuid4()).split('-'))
             image = qrcode.make(randomStr + '刘鹏').save(imagefile)
             numStr = '第' + str(i) + '行第' + str(j) + '列'
+            table.cell(i, j).add_paragraph(randomStr)
             paragraph = table.cell(i, j).add_paragraph(numStr)
-            paragraph2 = table.cell(i, j).add_paragraph(randomStr)
             run = paragraph.add_run()
             run.add_picture(imagefile, width=Inches(1))
     document.save(filename)

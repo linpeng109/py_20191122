@@ -1,5 +1,5 @@
 import pyttsx3
-engine = pyttsx3.init()
+engine = pyttsx3.createObserver()
 voices = engine.getProperty('voices')
 for voice in voices:
     print(voice, voice.id)
