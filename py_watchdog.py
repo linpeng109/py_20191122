@@ -48,7 +48,6 @@ if __name__ == "__main__":
     observer = createObserver()
     try:
         while observer.is_alive():
-            # observer.join()
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
