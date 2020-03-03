@@ -4,15 +4,12 @@ import uuid
 import qrcode
 import win32api
 import win32print
-from docx import Document
+from docx import Document as Doc
 from docx.shared import Inches
-
-def createDATA():
-    
 
 
 def createDOCX(filename, rows, cols):
-    document = Document()
+    document = Doc()
     document.add_heading("样本盘二维码", level=1)
     document.add_heading("日期：" + str(datetime.date.today()), level=2)
     table = document.add_table(rows=rows, cols=cols)
@@ -23,7 +20,7 @@ def createDOCX(filename, rows, cols):
             image = qrcode.make(randomStr + '刘鹏').save(imagefile)
             numStr = '第' + str(i) + '行第' + str(j) + '列'
             paragraph = table.cell(i, j).add_paragraph(numStr)
-            paragraph2 = table.cell(i, j).add_paragraph(randomStr)
+            table.cell(i, j).add_paragraph(randomStr)
             run = paragraph.add_run()
             run.add_picture(imagefile, width=Inches(1))
     document.save(filename)
@@ -35,8 +32,8 @@ def printDOCX(filename):
 
 
 if __name__ == '__main__':
-    filename = "d:/test.docx"
+    filename = "/home/pi/Shared/test.docx"
     rows = 4
     cols = 5
     createDOCX(filename=filename, rows=rows, cols=cols)
-    printDOCX(filename=filename)
+    # printDOCX(filename=filename)

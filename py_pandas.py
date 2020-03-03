@@ -7,7 +7,6 @@ import py_path as path
 
 def convertHCSTxt(hcsTextFileName):
     # 读取
-    # dict = {'sep': ' ', 'encoding': 'UTF-16', 'dtype': 'str', 'header': None, 'engine': 'python'}
     dict = {'sep': ' ', 'encoding': 'UTF-16', 'dtype': 'str', 'header': None, 'engine': 'python', 'na_filter': False}
     hcsDf = pd.read_csv(filepath_or_buffer=hcsTextFileName, **dict)
     print(hcsDf)
@@ -53,6 +52,7 @@ def convertAASTxt(aasTextFilename):
 
 
 def convertFilename(filename):
+    outpath='d:/'
     fileinfo = path.splitFullPathFileName(filename)
     newfilename = (fileinfo.get('path') + fileinfo.get('sep') + fileinfo.get('main') + '_OK' + '.txt')
     return newfilename
@@ -62,15 +62,12 @@ def startProcess(file):
     if (path.filenameIsContains(file, ['AAS.txt'])):
         process = Process(target=convertAASTxt, args=(file,))
         process.start()
-        # process.join()
     if (path.filenameIsContains(file, ['HCS.txt'])):
         process = Process(target=convertHCSTxt, args=(file,))
         process.start()
-        # process.join()
     if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
         process = Process(target=convertAFSExcel, args=(file,))
         process.start()
-        # process.join()
 
 
 if __name__ == '__main__':
