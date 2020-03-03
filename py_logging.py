@@ -1,9 +1,8 @@
 import logging
-import sys
 from logging.handlers import RotatingFileHandler
 
 import psutil
-
+import sys
 import py_config
 
 
