@@ -1,35 +1,37 @@
-import time
-
 from watchdog.events import PatternMatchingEventHandler
 from watchdog.observers.polling import PollingObserver as Observer
 
-import py_logging
 import py_config
+import py_logging
 import py_pandas as pandas
+import py_path as path
+import time
 
+cfg = py_config.getCfg(config='py_watchdog.ini')
+logger = py_logging.getLogger(config='py_watchdog.ini')
 
-# def __init__(self, config=None, patterns=None, ignore_patterns=None,
-#              ignore_directories=False, case_sensitive=False):
-#     super(MyHandler, self).__init__()
-#     # self.logger = py_logging.getLogger(config=config)
 
 def on_created(event):
-    # self.logger.debug(event.src_path)
-    pandas.startProcess(event.src_path)
+    file = event.src_path
+    if (path.filenameIsContains(file, ['AAS.txt'])):
+        pandas.convertAASTxt(file)
+    if (path.filenameIsContains(file, ['HCS.txt'])):
+        pandas.convertHCSTxt(file)
+    if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
+        pandas.convertAFSExcel(file)
 
 
 def on_modified(event):
-    # self.logger.debug(event)
-    pandas.startProcess(event.src_path)
+    file = event.src_path
+    if (path.filenameIsContains(file, ['AAS.txt'])):
+        pandas.convertAASTxt(file)
+    if (path.filenameIsContains(file, ['HCS.txt'])):
+        pandas.convertHCSTxt(file)
+    if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
+        pandas.convertAFSExcel(file)
 
 
-# def on_any_event(self, event):
-# self.logger.debug(event)
-
-
-def startObserver(config):
-    cfg = py_config.getCfg(config=config)
-    logger = py_logging.getLogger(config=config)
+def startObserver():
     patterns = cfg.get('watchdog', 'patterns').split(';')
     path = cfg.get('watchdog', 'path')
     recursive = cfg.getboolean('watchdog', 'recursive')
@@ -48,14 +50,13 @@ def startObserver(config):
     logger.debug('path=%s' % path)
     logger.debug('patterns=%s' % patterns)
     try:
-        while 1:
-            time.sleep(5)
+        while observer.is_alive:
+            time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
         logger.debug("WatchDog is stopped.")
     observer.join()
-    # return observer
 
 
 if __name__ == "__main__":
-    startObserver(config='py_watchdog.ini')
+    startObserver()

@@ -37,7 +37,7 @@ class MyHandler(FTPHandler):
 
 def main():
     # 配置管理
-    cfg = config.getCfg()
+    cfg = config.getCfg(config='config.ini')
 
     # 用户管理
     authorizer = DummyAuthorizer()
