@@ -1,8 +1,7 @@
 import logging
+import sys
 from logging.handlers import RotatingFileHandler
 
-import psutil
-import sys
 import py_config
 
 
@@ -22,10 +21,10 @@ def getLogger(config):
     return logger
 
 
-if __name__ == '__main__':
-    logger = getLogger(logConfig='py_watchdog.ini')
-    for i in range(10000):
-        cpuper = psutil.cpu_percent()
-        mem = psutil.virtual_memory()
-        line = f'cpu:{cpuper}% mem:{mem} '
-        logger.info(line)
+# if __name__ == '__main__':
+#     logger = getLogger(config='py_watchdog.ini')
+#     for i in range(10000):
+#         cpuper = psutil.cpu_percent()
+#         mem = psutil.virtual_memory()
+#         line = f'cpu:{cpuper}% mem:{mem} '
+#         logger.info(line)

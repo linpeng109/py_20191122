@@ -1,4 +1,4 @@
-from wxpy import *
+from wxpy import Bot
 
 
 def loginAndSend(filename):

@@ -12,7 +12,7 @@ def getCfg(config):
     return cfg
 
 
-if __name__ == '__main__':
-    cfg = getCfg('py_watchdog.ini')
-    dic = dict(cfg.items('logger'))
-    print(dic)
+# if __name__ == '__main__':
+#     cfg = getCfg('py_watchdog.ini')
+#     dic = dict(cfg.items('logger'))
+#     print(dic)

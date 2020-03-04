@@ -3,6 +3,7 @@ from multiprocessing import Process
 import pandas as pd
 
 import py_path as path
+# import py_wx as wx
 
 
 def convertHCSTxt(hcsTextFileName):
@@ -52,10 +53,14 @@ def convertAASTxt(aasTextFilename):
 
 
 def convertFilename(filename):
-    outpath='d:/'
+    outpath = 'd:/'
     fileinfo = path.splitFullPathFileName(filename)
     newfilename = (fileinfo.get('path') + fileinfo.get('sep') + fileinfo.get('main') + '_OK' + '.txt')
     return newfilename
+
+
+# def convertPUID(filename):
+#     wx.loginAndSend('d:/test.docx')
 
 
 def startProcess(file):
@@ -68,9 +73,12 @@ def startProcess(file):
     if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
         process = Process(target=convertAFSExcel, args=(file,))
         process.start()
+    # if (path.filenameIsContains(file, ['puid.txt'])):
+    #     process = Process(target=convertPUID, args=(file,))
+    #     process.start()
 
 
-if __name__ == '__main__':
-    aasTextFileName = '20191127AAS.txt'
-    p = Process(target=convertAASTxt, args=(aasTextFileName,))
-    p.start()
+# if __name__ == '__main__':
+#     aasTextFileName = '20191127AAS.txt'
+#     p = Process(target=convertAASTxt, args=(aasTextFileName,))
+#     p.start()

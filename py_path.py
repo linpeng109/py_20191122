@@ -20,9 +20,9 @@ def filenameIsContains(fullPathFileName, strs):
     return result
 
 
-if __name__ == '__main__':
-    fullname = '/home/pi/Shared/AFS-8510.xlsx'
-    result1 = splitFullPathFileName(fullname)
-    print(result1)
-    result = filenameIsContains(fullname, ['AFS', 'xlsx'])
-    print(result)
+# if __name__ == '__main__':
+#     fullname = '/home/pi/Shared/AFS-8510.xlsx'
+#     result1 = splitFullPathFileName(fullname)
+#     print(result1)
+#     result = filenameIsContains(fullname, ['AFS', 'xlsx'])
+#     print(result)
