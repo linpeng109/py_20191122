@@ -1,34 +1,31 @@
+import multiprocessing
+import os
+import time
+
 from watchdog.events import PatternMatchingEventHandler
 from watchdog.observers.polling import PollingObserver as Observer
 
 import py_config
 import py_logging
 import py_pandas as pandas
-import py_path as path
-import time
 
 cfg = py_config.getCfg(config='py_watchdog.ini')
 logger = py_logging.getLogger(config='py_watchdog.ini')
 
 
+# pandas._log = logger
+
+
+def _router(event):
+    pandas.startProcess(event)
+
+
 def on_created(event):
-    file = event.src_path
-    if (path.filenameIsContains(file, ['AAS.txt'])):
-        pandas.convertAASTxt(file)
-    if (path.filenameIsContains(file, ['HCS.txt'])):
-        pandas.convertHCSTxt(file)
-    if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
-        pandas.convertAFSExcel(file)
+    pandas.startProcess(event)
 
 
 def on_modified(event):
-    file = event.src_path
-    if (path.filenameIsContains(file, ['AAS.txt'])):
-        pandas.convertAASTxt(file)
-    if (path.filenameIsContains(file, ['HCS.txt'])):
-        pandas.convertHCSTxt(file)
-    if (path.filenameIsContains(file, ['AFS', '.xlsx'])):
-        pandas.convertAFSExcel(file)
+    _router(event=event)
 
 
 def startObserver():
@@ -46,17 +43,18 @@ def startObserver():
     observer.schedule(event_handler=event_handler,
                       path=path, recursive=recursive)
     observer.start()
-    logger.debug("WatchDog is startting...")
+    logger.debug('WatchDog is startting......')
     logger.debug('path=%s' % path)
     logger.debug('patterns=%s' % patterns)
     try:
-        while observer.is_alive:
+        while observer.is_alive():
             time.sleep(1)
-    except KeyboardInterrupt:
+    except  KeyboardInterrupt:
         observer.stop()
-        logger.debug("WatchDog is stopped.")
     observer.join()
 
 
 if __name__ == "__main__":
+    if (os.sys.platform.startswith('win')):
+        multiprocessing.freeze_support()
     startObserver()

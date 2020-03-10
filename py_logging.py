@@ -21,10 +21,10 @@ def getLogger(config):
     return logger
 
 
-# if __name__ == '__main__':
-#     logger = getLogger(config='py_watchdog.ini')
-#     for i in range(10000):
-#         cpuper = psutil.cpu_percent()
-#         mem = psutil.virtual_memory()
-#         line = f'cpu:{cpuper}% mem:{mem} '
-#         logger.info(line)
+if __name__ == '__main__':
+    logger = getLogger(config='py_watchdog.ini')
+    for i in range(10000):
+        cpuper = psutil.cpu_percent()
+        mem = psutil.virtual_memory()
+        line = f'cpu:{cpuper}% mem:{mem} '
+        logger.info(line)
